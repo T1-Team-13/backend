@@ -1,6 +1,8 @@
 package t1.team13.achievements.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,10 @@ public class AuthController {
             summary = "Вход в систему",
             description = "Возвращает сущность `Пользователь`"
     )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "ok"),
+            @ApiResponse(responseCode = "401", description = "неверная почта или пароль")
+    })
     @PostMapping("/login")
     public UserDTO login(@RequestBody LoginDTO dto) {
         User user = authService.login(dto);

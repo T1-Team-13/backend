@@ -1,6 +1,8 @@
 package t1.team13.achievements.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,10 @@ public class UserProfileController {
     private final UserMapper userMapper;
 
     @Operation(summary = "Получить пользователя по id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "ok"),
+            @ApiResponse(responseCode = "404", description = "пользователь не найден")
+    })
     @GetMapping("/{userId}")
     public UserDTO getUser(@PathVariable String userId) {
         User user = userService.findById(UUID.fromString(userId));
