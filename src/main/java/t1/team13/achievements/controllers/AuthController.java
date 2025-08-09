@@ -2,17 +2,24 @@ package t1.team13.achievements.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import t1.team13.achievements.dto.LoginDTO;
 import t1.team13.achievements.dto.UserDTO;
+import t1.team13.achievements.models.User;
+import t1.team13.achievements.services.AuthService;
+import t1.team13.achievements.util.UserMapper;
 
+@Tag(name = "Контроллер аутентификации")
 @RestController
 @RequestMapping("/api/v1/auth")
-@Tag(name = "Контроллер аутентификации")
+@AllArgsConstructor
 public class AuthController {
+    private final AuthService authService;
+    private final UserMapper userMapper;
 
     @Operation(
             summary = "Вход в систему",
@@ -20,6 +27,7 @@ public class AuthController {
     )
     @PostMapping("/login")
     public UserDTO login(@RequestBody LoginDTO dto) {
-        return null;
+        User user = authService.login(dto);
+        return userMapper.map(user);
     }
 }
