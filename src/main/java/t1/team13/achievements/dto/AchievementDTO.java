@@ -35,6 +35,6 @@ public class AchievementDTO {
     @Schema(description = "категории, к которым относится это достижение")
     private List<CategoryDTO> categories;
 
-    @Schema(description = "задачи, которые нужно выполнить, чтобы получить это достижение")
-    private List<TaskDTO> tasks;
+    @Schema(description = "конкретные задачи, которые нужно выполнить, чтобы получить это достижение")
+    private List<SpecificTaskDTO> specificTasks;
 }

@@ -5,9 +5,9 @@ import lombok.Data;
 
 import java.util.UUID;
 
-@Schema(description = "Сущность `Активность`")
+@Schema(description = "Сущность `Конкретная задача`")
 @Data
-public class TaskDTO {
+public class SpecificTaskDTO {
 
     @Schema(description = "id активности")
     private UUID id;
