@@ -1,4 +1,4 @@
-package t1.team13.achievements.util;
+package t1.team13.achievements.util.mappers;
 
 import org.springframework.stereotype.Component;
 import t1.team13.achievements.dto.CategoryDTO;

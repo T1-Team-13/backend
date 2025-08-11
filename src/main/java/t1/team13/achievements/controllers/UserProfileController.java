@@ -15,7 +15,7 @@ import t1.team13.achievements.dto.UserDTO;
 import t1.team13.achievements.models.User;
 import t1.team13.achievements.services.UserService;
 import t1.team13.achievements.util.ErrorResponse;
-import t1.team13.achievements.util.UserMapper;
+import t1.team13.achievements.util.mappers.UserMapper;
 
 import java.util.List;
 import java.util.UUID;

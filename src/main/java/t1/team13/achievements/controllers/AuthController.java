@@ -16,7 +16,7 @@ import t1.team13.achievements.dto.UserDTO;
 import t1.team13.achievements.models.User;
 import t1.team13.achievements.services.AuthService;
 import t1.team13.achievements.util.ErrorResponse;
-import t1.team13.achievements.util.UserMapper;
+import t1.team13.achievements.util.mappers.UserMapper;
 
 @Tag(name = "Контроллер аутентификации")
 @RestController

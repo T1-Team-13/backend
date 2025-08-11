@@ -6,7 +6,6 @@ import t1.team13.achievements.models.Achievement;
 import t1.team13.achievements.models.AchievementCategory;
 import t1.team13.achievements.models.Category;
 import t1.team13.achievements.repositories.AchievementCategoryRepository;
-import t1.team13.achievements.repositories.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryService {
     private final AchievementCategoryRepository achievementCategoryRepository;
-    private final CategoryRepository categoryRepository;
 
     public List<Category> findByAchievement(Achievement achievement) {
         List<AchievementCategory> achievementCategories = achievementCategoryRepository.findByAchievement(achievement);

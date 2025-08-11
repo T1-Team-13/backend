@@ -27,10 +27,6 @@ public class AchievementService {
     public List<UserAchievement> findByUser(User user) {
         return userAchievementRepository.findByUser(user);
     }
-    
-    public List<Achievement> findAll() {
-        return achievementRepository.findAll();
-    }
 
     public Achievement findById(UUID id) {
         return achievementRepository.findById(id).orElseThrow(() -> new NotFoundException("Достижение с id = " + id + " не найдено"));

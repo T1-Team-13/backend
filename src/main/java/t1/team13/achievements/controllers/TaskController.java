@@ -13,7 +13,7 @@ import t1.team13.achievements.dto.TaskExecution;
 import t1.team13.achievements.models.Task;
 import t1.team13.achievements.services.TaskService;
 import t1.team13.achievements.util.ErrorResponse;
-import t1.team13.achievements.util.TaskMapper;
+import t1.team13.achievements.util.mappers.TaskMapper;
 
 import java.util.List;
 import java.util.UUID;
