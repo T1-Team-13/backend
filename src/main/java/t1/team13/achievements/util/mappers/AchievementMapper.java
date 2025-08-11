@@ -31,17 +31,11 @@ public class AchievementMapper {
         achievementDTO.setCurrentProgress(progress.getCurrent());
         achievementDTO.setRequiredProgress(progress.getRequired());
 
-        String lockedImageUrl = ServletUriComponentsBuilder
+        String imageUrl = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path(achievement.getLockedImagePath())
+                .path(achievement.getImagePath())
                 .toUriString();
-        String unlockedImageUrl = ServletUriComponentsBuilder
-                .fromCurrentContextPath()
-                .path(achievement.getUnlockedImagePath())
-                .toUriString();
-
-        achievementDTO.setLockedImageUrl(lockedImageUrl);
-        achievementDTO.setUnlockedImageUrl(unlockedImageUrl);
+        achievementDTO.setImageUrl(imageUrl);
 
         return achievementDTO;
     }

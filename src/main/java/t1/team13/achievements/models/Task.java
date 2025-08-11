@@ -22,4 +22,6 @@ public class Task {
     private List<UserTask> userTasks;
 
     private String description;
+
+    private String name;
 }

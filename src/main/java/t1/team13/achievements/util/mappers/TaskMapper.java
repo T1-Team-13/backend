@@ -14,6 +14,7 @@ public class TaskMapper {
     public CommonTaskDTO mapToCommon(Task task) {
         CommonTaskDTO dto = new CommonTaskDTO();
         dto.setId(task.getId());
+        dto.setName(task.getName());
         dto.setDescription(task.getDescription());
         return dto;
     }
@@ -29,6 +30,7 @@ public class TaskMapper {
         for (AchievementTask achievementTask : achievementTasks) {
             SpecificTaskDTO taskDTO = new SpecificTaskDTO();
             taskDTO.setId(achievementTask.getTask().getId());
+            taskDTO.setName(achievementTask.getTask().getName());
             taskDTO.setDescription(achievementTask.getTask().getDescription());
             taskDTO.setRequiredProgress(achievementTask.getRequiredProgress());
             specificTaskDTOS.add(taskDTO);

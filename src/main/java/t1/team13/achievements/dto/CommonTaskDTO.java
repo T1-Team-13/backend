@@ -9,9 +9,12 @@ import java.util.UUID;
 @Data
 public class CommonTaskDTO {
 
-    @Schema(description = "id задачи")
+    @Schema(description = "id активности/задачи")
     private UUID id;
 
-    @Schema(description = "описание задачи", example = "выступить на конференции")
+    @Schema(description = "название активности", example = "выступить на конференции")
+    private String name;
+
+    @Schema(description = "описание активности")
     private String description;
 }

@@ -19,11 +19,8 @@ public class Achievement {
 
     private String description;
 
-    @Column(name = "unlocked_image_path")
-    private String unlockedImagePath;
-
-    @Column(name = "locked_image_path")
-    private String lockedImagePath;
+    @Column(name = "image_path")
+    private String imagePath;
 
     @OneToMany(mappedBy = "achievement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserAchievement> userAchievements;

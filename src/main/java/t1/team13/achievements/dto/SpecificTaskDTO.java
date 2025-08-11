@@ -9,10 +9,13 @@ import java.util.UUID;
 @Data
 public class SpecificTaskDTO {
 
-    @Schema(description = "id активности")
+    @Schema(description = "id активности/задачи")
     private UUID id;
 
-    @Schema(description = "описание активности", example = "выступить на конференции")
+    @Schema(description = "название активности", example = "выступить на конференции")
+    private String name;
+
+    @Schema(description = "описание активности")
     private String description;
 
     @Schema(description = "требуемый прогресс для выполнения этой задачи")

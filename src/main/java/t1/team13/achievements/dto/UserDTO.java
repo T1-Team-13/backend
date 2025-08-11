@@ -28,6 +28,6 @@ public class UserDTO {
     @Schema(description = "Дата и время регистрации")
     private LocalDateTime registrationDate;
 
-    @Schema(description = "URL аватарки пользователя", example = "http://localhost:8080/uploads/images/avatars/{userId}.jpg")
+    @Schema(description = "URL аватарки пользователя", example = "http://localhost:8080/uploads/avatars/{userId}.jpg")
     private String imageUrl;
 }
