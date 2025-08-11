@@ -12,6 +12,7 @@ import t1.team13.achievements.util.mappers.CategoryMapper;
 import t1.team13.achievements.util.mappers.TaskMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,7 +30,7 @@ public class AchievementDTOService {
     public AchievementDTO getAchievementDto(UUID userId, UUID achievementId) {
         User user = userService.findById(userId);
         Achievement achievement = achievementService.findById(achievementId);
-        UserAchievement userAchievement = userAchievementService.findByAchievementAndUser(achievement, user);
+        Optional<UserAchievement> userAchievement = userAchievementService.findByAchievementAndUser(achievement, user);
         List<AchievementTask> achievementTasks = achievement.getAchievementTasks();
         List<Category> categories = categoryService.findByAchievement(achievement);
         List<CategoryDTO> categoryDTOS = categoryMapper.map(categories);
@@ -46,11 +47,9 @@ public class AchievementDTOService {
     }
 
     public List<AchievementDTO> getAllAchievementDTOS(UUID userId) {
-        User user = userService.findById(userId);
-        List<UserAchievement> userAchievements = userAchievementService.findByUser(user);
-
-        return userAchievements.stream()
-                .map(userAchievement -> getAchievementDto(userId, userAchievement.getAchievement().getId()))
+        List<Achievement> achievements = achievementService.findAll();
+        return achievements.stream()
+                .map(achievement -> getAchievementDto(userId, achievement.getId()))
                 .toList();
     }
 }

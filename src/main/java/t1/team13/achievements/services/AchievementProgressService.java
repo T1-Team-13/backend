@@ -10,6 +10,7 @@ import t1.team13.achievements.util.ProgressResult;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,6 +20,7 @@ public class AchievementProgressService {
     private final UserService userService;
     private final UserTaskService userTaskService;
     private final UserAchievementService userAchievementService;
+    private final AchievementService achievementService;
 
     public ProgressResult getAchievementProgress(User user, List<AchievementTask> achievementTasks) {
         Map<UUID, Integer> taskProgressMap = userTaskService.findTasksProgressByUser(user);
@@ -57,18 +59,22 @@ public class AchievementProgressService {
     }
 
     private void updateAchievementsProgress(User user) {
-        List<UserAchievement> userAchievements = userAchievementService.findByUser(user);
+        List<Achievement> achievements = achievementService.findAll();
 
-        for (UserAchievement userAchievement : userAchievements) {
-            List<AchievementTask> achievementTasks = userAchievement.getAchievement().getAchievementTasks();
+        for (Achievement achievement : achievements) {
+            List<AchievementTask> achievementTasks = achievement.getAchievementTasks();
+            Optional<UserAchievement> optionalUserAchievement = userAchievementService.findByAchievementAndUser(achievement, user);
             ProgressResult progress = getAchievementProgress(user, achievementTasks);
 
-            if (progress.getCurrent() >= progress.getRequired() && !userAchievement.isCompleted()) {
-                userAchievement.setCompleted(true);
+            if (progress.getCurrent() >= progress.getRequired() && optionalUserAchievement.isEmpty()) {
+                UserAchievement userAchievement = new UserAchievement();
+                userAchievement.setUser(user);
+                userAchievement.setAchievement(achievement);
                 userAchievement.setCompletedAt(LocalDateTime.now());
-            } else if (progress.getCurrent() < progress.getRequired() && userAchievement.isCompleted()) {
-                userAchievement.setCompleted(false);
-                userAchievement.setCompletedAt(null);
+                userAchievementService.save(userAchievement);
+            } else if (progress.getCurrent() < progress.getRequired() && optionalUserAchievement.isPresent()) {
+                UserAchievement userAchievement = optionalUserAchievement.get();
+                userAchievementService.delete(userAchievement);
             }
         }
     }

@@ -25,7 +25,4 @@ public class UserAchievement {
 
     @Column(name = "completed_at")
     private LocalDateTime completedAt;
-
-    @Column(name = "is_completed")
-    private boolean isCompleted;
 }

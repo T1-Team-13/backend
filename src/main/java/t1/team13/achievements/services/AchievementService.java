@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import t1.team13.achievements.exceptions.NotFoundException;
 import t1.team13.achievements.models.Achievement;
-import t1.team13.achievements.models.User;
-import t1.team13.achievements.models.UserAchievement;
 import t1.team13.achievements.repositories.AchievementRepository;
-import t1.team13.achievements.repositories.UserAchievementRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,5 +16,9 @@ public class AchievementService {
 
     public Achievement findById(UUID id) {
         return achievementRepository.findById(id).orElseThrow(() -> new NotFoundException("Достижение с id = " + id + " не найдено"));
+    }
+
+    public List<Achievement> findAll() {
+        return achievementRepository.findAll();
     }
 }

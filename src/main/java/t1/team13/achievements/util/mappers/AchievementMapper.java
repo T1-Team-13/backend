@@ -10,12 +10,13 @@ import t1.team13.achievements.models.UserAchievement;
 import t1.team13.achievements.util.ProgressResult;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AchievementMapper {
     public AchievementDTO mapToAchievementDTO(
             Achievement achievement,
-            UserAchievement userAchievement,
+            Optional<UserAchievement> userAchievement,
             List<SpecificTaskDTO> specificTaskDTOS,
             List<CategoryDTO> categoryDTOS,
             ProgressResult progress
@@ -24,12 +25,18 @@ public class AchievementMapper {
         achievementDTO.setId(achievement.getId());
         achievementDTO.setTitle(achievement.getTitle());
         achievementDTO.setDescription(achievement.getDescription());
-        achievementDTO.setCompleted(userAchievement.isCompleted());
-        achievementDTO.setCompletedAt(userAchievement.getCompletedAt());
         achievementDTO.setSpecificTasks(specificTaskDTOS);
         achievementDTO.setCategories(categoryDTOS);
         achievementDTO.setCurrentProgress(progress.getCurrent());
         achievementDTO.setRequiredProgress(progress.getRequired());
+
+        if (userAchievement.isPresent()) {
+            achievementDTO.setCompleted(true);
+            achievementDTO.setCompletedAt(userAchievement.get().getCompletedAt());
+        } else {
+            achievementDTO.setCompleted(false);
+            achievementDTO.setCompletedAt(null);
+        }
 
         String imageUrl = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
