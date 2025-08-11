@@ -1,6 +1,7 @@
 package t1.team13.achievements.util.mappers;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import t1.team13.achievements.dto.AchievementDTO;
 import t1.team13.achievements.dto.CategoryDTO;
 import t1.team13.achievements.dto.SpecificTaskDTO;
@@ -29,6 +30,18 @@ public class AchievementMapper {
         achievementDTO.setCategories(categoryDTOS);
         achievementDTO.setCurrentProgress(progress.getCurrent());
         achievementDTO.setRequiredProgress(progress.getRequired());
+
+        String lockedImageUrl = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(achievement.getLockedImagePath())
+                .toUriString();
+        String unlockedImageUrl = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(achievement.getUnlockedImagePath())
+                .toUriString();
+
+        achievementDTO.setLockedImageUrl(lockedImageUrl);
+        achievementDTO.setUnlockedImageUrl(unlockedImageUrl);
 
         return achievementDTO;
     }

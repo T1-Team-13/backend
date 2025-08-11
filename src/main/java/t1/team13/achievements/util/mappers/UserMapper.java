@@ -1,6 +1,7 @@
 package t1.team13.achievements.util.mappers;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import t1.team13.achievements.dto.UserDTO;
 import t1.team13.achievements.models.User;
 
@@ -16,6 +17,13 @@ public class UserMapper {
         dto.setPatronymic(user.getPatronymic());
         dto.setRole(user.getRole().toString());
         dto.setRegistrationDate(user.getRegistrationDate());
+
+        String imageUrl = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(user.getAvatarPath())
+                .toUriString();
+        dto.setImageUrl(imageUrl);
+
         return dto;
     }
 

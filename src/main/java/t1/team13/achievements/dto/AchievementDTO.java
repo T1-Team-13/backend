@@ -37,4 +37,10 @@ public class AchievementDTO {
 
     @Schema(description = "конкретные задачи, которые нужно выполнить, чтобы получить это достижение")
     private List<SpecificTaskDTO> specificTasks;
+
+    @Schema(description = "URL картинки невыполненного достижения", example = "http://localhost:8080/uploads/images/achievements/locked/{achievementId}.jpg")
+    private String lockedImageUrl;
+
+    @Schema(description = "URL картинки выполненного достижения", example = "http://localhost:8080/uploads/images/achievements/unlocked/{achievementId}.jpg")
+    private String unlockedImageUrl;
 }
