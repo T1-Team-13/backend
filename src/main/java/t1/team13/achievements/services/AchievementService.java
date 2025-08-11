@@ -16,17 +16,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AchievementService {
     private final AchievementRepository achievementRepository;
-    private final UserAchievementRepository userAchievementRepository;
-
-    public UserAchievement findByAchievementAndUser(Achievement achievement, User user) {
-        return userAchievementRepository.findByAchievementAndUser(achievement, user).orElseThrow(() ->
-                new NotFoundException("Достижение с id = " + achievement.getId() + " у пользователя с id = " + user.getId() + " не найдено")
-        );
-    }
-
-    public List<UserAchievement> findByUser(User user) {
-        return userAchievementRepository.findByUser(user);
-    }
 
     public Achievement findById(UUID id) {
         return achievementRepository.findById(id).orElseThrow(() -> new NotFoundException("Достижение с id = " + id + " не найдено"));

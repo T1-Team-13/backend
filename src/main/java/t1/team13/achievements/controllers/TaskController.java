@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import t1.team13.achievements.dto.CommonTaskDTO;
 import t1.team13.achievements.dto.TaskExecution;
 import t1.team13.achievements.models.Task;
+import t1.team13.achievements.services.AchievementProgressService;
 import t1.team13.achievements.services.TaskService;
 import t1.team13.achievements.util.ErrorResponse;
 import t1.team13.achievements.util.mappers.TaskMapper;
@@ -24,6 +25,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TaskController {
     private final TaskService taskService;
+    private final AchievementProgressService progressService;
     private final TaskMapper taskMapper;
 
     @Operation(summary = "Получить все общие задачи")
@@ -58,6 +60,6 @@ public class TaskController {
     })
     @PostMapping
     public void addTaskExecution(@RequestBody TaskExecution taskExecution) {
-
+        progressService.updateProgress(taskExecution);
     }
 }
