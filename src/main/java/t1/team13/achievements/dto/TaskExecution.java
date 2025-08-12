@@ -9,9 +9,6 @@ import java.util.UUID;
 @Data
 public class TaskExecution {
 
-    @Schema(description = "id пользователя")
-    private UUID userId;
-
     @Schema(description = "id активности")
     private UUID taskId;
 

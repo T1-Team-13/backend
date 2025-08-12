@@ -44,8 +44,8 @@ public class AchievementProgressService {
     }
 
     @Transactional
-    public void updateProgress(TaskExecution taskExecution) {
-        User user = userService.findById(taskExecution.getUserId());
+    public void updateProgress(TaskExecution taskExecution, String userId) {
+        User user = userService.findById(UUID.fromString(userId));
         Task task = taskService.findById(taskExecution.getTaskId());
         int numberOfPoints = taskExecution.getNumberOfPoints();
 

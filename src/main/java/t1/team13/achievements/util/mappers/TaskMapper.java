@@ -3,8 +3,10 @@ package t1.team13.achievements.util.mappers;
 import org.springframework.stereotype.Component;
 import t1.team13.achievements.dto.CommonTaskDTO;
 import t1.team13.achievements.dto.SpecificTaskDTO;
+import t1.team13.achievements.dto.UserTaskDTO;
 import t1.team13.achievements.models.AchievementTask;
 import t1.team13.achievements.models.Task;
+import t1.team13.achievements.models.UserTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +38,20 @@ public class TaskMapper {
             specificTaskDTOS.add(taskDTO);
         }
         return specificTaskDTOS;
+    }
+
+    public UserTaskDTO mapToUserTaskDTO(UserTask userTask) {
+        UserTaskDTO dto = new UserTaskDTO();
+        dto.setId(userTask.getTask().getId());
+        dto.setName(userTask.getTask().getName());
+        dto.setDescription(userTask.getTask().getDescription());
+        dto.setCurrentProgress(userTask.getCurrentProgress());
+        return dto;
+    }
+
+    public List<UserTaskDTO> mapToUserTaskDTO(List<UserTask> userTasks) {
+        return userTasks.stream()
+                .map(this::mapToUserTaskDTO)
+                .toList();
     }
 }

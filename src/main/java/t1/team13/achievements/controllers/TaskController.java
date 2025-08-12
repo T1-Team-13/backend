@@ -7,11 +7,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import t1.team13.achievements.dto.CommonTaskDTO;
-import t1.team13.achievements.dto.TaskExecution;
 import t1.team13.achievements.models.Task;
-import t1.team13.achievements.services.AchievementProgressService;
 import t1.team13.achievements.services.TaskService;
 import t1.team13.achievements.util.ErrorResponse;
 import t1.team13.achievements.util.mappers.TaskMapper;
@@ -19,13 +20,12 @@ import t1.team13.achievements.util.mappers.TaskMapper;
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Контроллер задач/активностей")
+@Tag(name = "Контроллер общих задач/активностей")
 @RestController
 @RequestMapping("/api/v1/tasks")
 @AllArgsConstructor
 public class TaskController {
     private final TaskService taskService;
-    private final AchievementProgressService progressService;
     private final TaskMapper taskMapper;
 
     @Operation(summary = "Получить все общие задачи")
@@ -47,19 +47,5 @@ public class TaskController {
     public CommonTaskDTO getTask(@PathVariable String taskId) {
         Task task = taskService.findById(UUID.fromString(taskId));
         return taskMapper.mapToCommon(task);
-    }
-
-    @Operation(summary = "Зачислить пользователю некоторую активность")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "ok"),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "пользователь и/или задача не найдена",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
-            )
-    })
-    @PostMapping
-    public void addTaskExecution(@RequestBody TaskExecution taskExecution) {
-        progressService.updateProgress(taskExecution);
     }
 }

@@ -12,7 +12,7 @@ public class SpecificTaskDTO {
     @Schema(description = "id активности/задачи")
     private UUID id;
 
-    @Schema(description = "название активности", example = "выступить на конференции")
+    @Schema(description = "название активности")
     private String name;
 
     @Schema(description = "описание активности")
