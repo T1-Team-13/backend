@@ -9,17 +9,22 @@ git clone https://github.com/T1-Team-13/backend
 
 ### 2. Запуск сервисов
 ```bash
-docker compose up
+docker compose up -d
 ```
 
-### 3. Войти в контейнер с PostgreSQL
+### 3. Найти название контейнера PostgreSQL
 ```bash
-docker exec -it postgres bash
+docker ps
 ```
 
-### 4. Запустить клиент psql
+### 4. Войти в контейнер с PostgreSQL
 ```bash
-psql -U postgres -d t1case3
+docker exec -it <название_контейнера_PostgreSQL> bash
+```
+
+### 5. Запустить клиент psql
+```bash
+psql -U postgres -d postgres
 ```
 
 ### 5. Скопировать содержимое файла data.sql (находится в папке /sql), вставить в терминал, нажать Enter
